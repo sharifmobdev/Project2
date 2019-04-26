@@ -50,7 +50,8 @@ public class CommentAdapter extends BaseAdapter {
             // You should fetch the LayoutInflater once in your constructor
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item, null);
-            convertView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            convertView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    mContext.getResources().getDimensionPixelSize(R.dimen.thumbnail_height)));
             holder = new ViewHolder();
             holder.name = convertView.findViewById(R.id.text1);
             holder.body = convertView.findViewById(R.id.text2);

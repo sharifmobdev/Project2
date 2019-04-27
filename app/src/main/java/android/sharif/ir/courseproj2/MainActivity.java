@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         if (isInCommentsPage) {
             gridview.setAdapter(postAdapter);
             isInCommentsPage = false;
-            title_text.setText("");
+            title_text.setText(postAdapter.getCount() + " posts");
 
         } else
             super.onBackPressed();
@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 postAdapter = new PostAdapter(MainActivity.this, response);
                 gridview.setAdapter(postAdapter);
+                title_text.setText(postAdapter.getCount() + " posts");
             }
         });
     }

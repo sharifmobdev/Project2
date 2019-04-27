@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
                 if (isInCommentsPage) return;
                 final PostAdapter.ViewHolder holder = (PostAdapter.ViewHolder) view.getTag();
-                final String url = "https://jsonplaceholder.typicode.com/posts/" + holder.id + "/comments";
+                final String url = "https://jsonplaceholder.typicode.com/comments?postId=" + holder.id;
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {

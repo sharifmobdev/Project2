@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class PostAdapter extends BaseAdapter {
     private final JSONArray mResponse;
@@ -48,7 +49,6 @@ public class PostAdapter extends BaseAdapter {
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         ViewHolder holder;
         if (convertView == null) {
-            // You should fetch the LayoutInflater once in your constructor
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item, null);
             convertView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -57,18 +57,20 @@ public class PostAdapter extends BaseAdapter {
             holder.title = convertView.findViewById(R.id.text1);
             holder.desc = convertView.findViewById(R.id.text2);
             convertView.setTag(holder);
-
-            // Initialize ViewHolder here
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         try {
-            holder.title.setText(mResponse.getJSONObject(i).getString("title"));
-            holder.desc.setText(mResponse.getJSONObject(i).getString("body"));
-            holder.id = mResponse.getJSONObject(i).getInt("id");
+            fillViewHolder(mResponse.getJSONObject(i), holder);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return convertView;
+    }
+
+    protected void fillViewHolder(JSONObject jsonObject, ViewHolder holder) throws JSONException {
+        holder.title.setText(jsonObject.getString("title"));
+        holder.desc.setText(jsonObject.getString("body"));
+        holder.id = jsonObject.getInt("id");
     }
 }
